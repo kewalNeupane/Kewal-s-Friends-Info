@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Friends Info Finder</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px;
+    }
+    #friend-info {
+      margin-top: 30px;
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+    }
+    img {
+      max-width: 150px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Search Your Friend</h1>
+  <input type="text" id="searchInput" placeholder="Enter friend's name" />
+  <button onclick="searchFriend()">Submit</button>
+
+  <div id="friend-info"></div>
+
+  <script>
+    const friends = {
+      "elon bhujel": {
+        name: "Elon Bhujel",
+        birthday: "2064/04/16",
+        phone: "984-9504830",
+        address: "Mechinagar -1, Gadagalli, Jhapa (Near Ward 1)",
+        feature: "Gym Boy (Bodybuilder)",
+        photo: "Elon.jpg"
+      },
+      "sovit ghising": {
+        name: "Sovit Ghising",
+        birthday: "2064/04/17",
+        phone: "976-2909210",
+        address: "Mechinagar 1, Jhapa (Bhim sir ko dokan mastira)",
+        feature: "Comedian + Gangster",
+        photo: "Sovit.jpg"
+      },
+      "sugam subedi": {
+        name: "Sugam Subedi",
+        birthday: "2064/12/20",
+        phone: "980-6032529",
+        address: "Mechinagar 04, Vrikuti",
+        feature: "Mechinagar Topper",
+        photo: "Sugam.jpg"
+      },
+      "prakhyat dulal": {
+        name: "Prakhyat Dulal",
+        birthday: "2008/02/27",
+        phone: "986-4593512",
+        address: "Mechinagar 2, Boudhamode",
+        feature: "School/College topper (especially chem)",
+        photo: "Prakhyat.jpg"
+      },
+      "biraj newpane": {
+        name: "Biraj Newpane",
+        birthday: "2008/12/18",
+        phone: "974-9918014",
+        address: "Mechinagar 02, Boudhamode",
+        feature: "Topper + Batsman + Bowler + WK",
+        photo: "Beraj.jpg"
+      },
+      "ankit acharya": {
+        name: "Ankit Acharya",
+        birthday: "2008/04/04",
+        phone: "976-7766991",
+        address: "Mechinagar 01, Mechidangi",
+        feature: "Padandass",
+        photo: "Ankit.jpg"
+      },
+      "sambhidhan adhikari": {
+        name: "Sambhidhan Adhikari",
+        birthday: "2064/12/28",
+        phone: "9706863524",
+        address: "Bahundangi, Jhapa",
+        feature: "Doctor Saheb",
+        photo: "Sambhidhan.jpg"
+      },
+      "anush khanal": {
+        name: "Anush Khanal",
+        birthday: "2008/10/04",
+        phone: "9862683985",
+        address: "Mechinagar 10, Dhulabari, Jhapa",
+        feature: "Arm wrestler",
+        photo: "Anush.jpg"
+      },
+      "aryan adhikari": {
+        name: "Aryan Adhikari",
+        birthday: "2008/05/04",
+        phone: "≈ Facebook: Aryan Adhikari",
+        address: "Rong-- ,Salakpur",
+        feature: "Padandass (secretly)",
+        photo: "Aryan.jpg"
+      },
+      "kewal neupane": {
+        name: "Kewal Neupane",
+        birthday: "2009/08/02 ≈ 2066/04/18",
+        phone: "9763516736",
+        address: "Mechinagar1, Tiring Jhapa",
+        feature: "Good at Nothing",
+        photo: "Kewal.jpg"
+      },
+      "parbati neupane": {
+        name: "Parbati Neupane",
+        birthday: "2045/04/13",
+        phone: "9810085513",
+        address: "Mechinagar1, Tiring, Jhapa",
+        feature: "Loving and Caring",
+        photo: "Parbati.jpg"
+      },
+      "keshab neupane": {
+        name: "Keshab Neupane",
+        birthday: "2036/08/11",
+        phone: "9742502201",
+        address: "Mechinagar1, Tiring, Jhapa",
+        feature: "Loving and Caring",
+        photo: "Keshab.jpg"
+      },
+      "krisha neupane": {
+        name: "Krisha Neupane",
+        birthday: "2072/02/04",
+        phone: "≈ Facebook: Krisha Neupane",
+        address: "Mechinagar 1, Tiring, Jhapa",
+        feature: "Loving but annoying",
+        photo: "Krisha.jpg"
+      },
+      "tilija neupane": {
+        name: "Tilija Neupane",
+        birthday: "2060/08/07",
+        phone: "9825921448",
+        address: "Mechinagar 1, Tiring, Jhapa",
+        feature: "Humble",
+        photo: "Tilija.jpg"
+      }
+    };
+
+    function searchFriend() {
+      const input = document.getElementById('searchInput').value.toLowerCase().trim();
+      const infoDiv = document.getElementById('friend-info');
+      const friend = friends[input];
+
+      if (friend) {
+        infoDiv.innerHTML = `
+          <h2>${friend.name}</h2>
+          <p><strong>Birthday:</strong> ${friend.birthday}</p>
+          <p><strong>Phone:</strong> ${friend.phone}</p>
+          <p><strong>Address:</strong> ${friend.address}</p>
+          <p><strong>Special Feature:</strong> ${friend.feature}</p>
+          <img src="${friend.photo}" alt="${friend.name}'s photo" />
+        `;
+        infoDiv.style.display = "block";
+      } else {
+        infoDiv.innerHTML = `<p>❌ Friend not found</p>`;
+        infoDiv.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
